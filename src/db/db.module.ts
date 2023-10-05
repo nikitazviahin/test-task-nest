@@ -4,18 +4,7 @@ import { Pool } from 'pg';
 
 import { PG_CONNECTION } from 'src/constants/db';
 
-// const DbProvider = {
-//   provide: PG_CONNECTION,
-//   useValue: new Pool({
-//     user: 'mykyta',
-//     host: 'localhost',
-//     database: 'population_data',
-//     password: 'Circus322',
-//     port: 5432,
-//   }),
-// };
-
-const DbProvider = {
+const PgConfig = {
   provide: PG_CONNECTION,
   useFactory: async (configService: ConfigService) => {
     const pool = new Pool({
@@ -30,19 +19,14 @@ const DbProvider = {
   },
 };
 
+const PgProvider = {
+  inject: [ConfigService],
+  ...PgConfig,
+};
+
 @Module({
   imports: [ConfigModule],
-  providers: [
-    {
-      inject: [ConfigService],
-      ...DbProvider,
-    },
-  ],
-  exports: [
-    {
-      inject: [ConfigService],
-      ...DbProvider,
-    },
-  ],
+  providers: [PgProvider],
+  exports: [PgProvider],
 })
 export class DbModule {}

@@ -1,12 +1,12 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get('/users')
-  getHello(): Promise<any> {
-    return this.appService.getCities();
+  @Get('/cities')
+  getHello(@Query() query): Promise<any> {
+    return this.appService.getCities(query.cityFilter, query.groupByFirstName);
   }
 }
