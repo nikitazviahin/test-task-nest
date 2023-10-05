@@ -8,7 +8,6 @@ export class LoggerMiddleware implements NestMiddleware {
 
   use(request: Request, response: Response, next: NextFunction): void {
     const startAt = process.hrtime();
-    const {} = request;
 
     response.on('close', () => {
       const diff = process.hrtime(startAt);
