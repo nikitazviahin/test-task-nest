@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DbModule } from './db/db.module';
 import { LoggerMiddleware } from './logger/logger.middleware';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { LoggerMiddleware } from './logger/logger.middleware';
       isGlobal: true,
     }),
     DbModule,
+    HttpModule,
   ],
   controllers: [AppController],
   providers: [AppService],
