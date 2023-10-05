@@ -12,7 +12,7 @@ export class AppService {
   constructor(@Inject(PG_CONNECTION) private conn: any) {}
 
   async getCities(cityFilter: string, groupByFirstName: boolean) {
-    const isFilterUsed = !cityFilter && cityFilter !== '' ? false : true;
+    const isFilterUsed = !cityFilter || cityFilter === '' ? false : true;
 
     const cityPopulationSqlQuery = this.getSqlQueryForCityPopulation(
       isFilterUsed,
